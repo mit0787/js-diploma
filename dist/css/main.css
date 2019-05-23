@@ -100,7 +100,7 @@ h4 {
 }
 .fixed-gift {
   position: fixed;
-  z-index: 10000;
+  z-index: 150;
   display: inline;
   top: 4rem;
   right: 2rem;
@@ -847,7 +847,7 @@ h4 {
   position: absolute;
   bottom: -3rem;
   left: 15rem;
-  z-index: 1000000;
+  z-index: 100;
 }
 .feedback-block .button-order:before {
   content: '';
@@ -1009,7 +1009,7 @@ h4 {
   margin-top: 1rem;
 }
 .popup-consultation {
-  z-index: 20;
+  z-index: 200;
   position: fixed;
   display: none;
   top: 0;
@@ -1079,7 +1079,7 @@ h4 {
   padding: 4rem 6rem 5rem 6rem;
 }
 .popup-gift {
-  z-index: 20;
+  z-index: 200;
   position: fixed;
   display: none;
   top: 0;
@@ -1125,7 +1125,7 @@ h4 {
   padding: 4rem 6rem 5rem 6rem;
 }
 .popup-design {
-  z-index: 20;
+  z-index: 200;
   position: fixed;
   display: none;
   top: 0;
