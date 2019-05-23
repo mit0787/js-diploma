@@ -254,11 +254,11 @@ function modals() {
     openModal(popupGift);
     btnsGift.style.display = 'none';
   });
-  var height = document.body.clientHeight;
+  var height = document.body.getBoundingClientRect().bottom + window.pageYOffset;
   window.addEventListener('scroll', openGift);
 
   function openGift() {
-    if (window.pageYOffset > height + window.innerHeight) {
+    if (window.pageYOffset + window.outerHeight > height) {
       openModal(popupGift);
       btnsGift.style.display = 'none';
       window.removeEventListener('scroll', openGift);
