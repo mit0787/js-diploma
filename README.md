@@ -1,2 +1,2 @@
-# js-diploma
-Дипломная работа JS7.0
+# Дипломная работа JS7.0
+https://mit0787.github.io/js-diploma/
