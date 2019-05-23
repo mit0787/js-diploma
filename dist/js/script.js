@@ -173,9 +173,68 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function mainSlider() {}
+function mainSlider() {
+  // верхний слайдер
+  var mainSlider = document.querySelectorAll('.main-slider-item'),
+      currentSlide = 0,
+      slideInterval = setInterval(nextSlide, 5000);
+  mainSlider[1].style.display = 'none';
+
+  function nextSlide() {
+    mainSlider[currentSlide].style.display = 'none';
+    currentSlide = (currentSlide + 1) % mainSlider.length;
+    mainSlider[currentSlide].style.display = 'block';
+  }
+}
 
 module.exports = mainSlider;
+
+/***/ }),
+
+/***/ "./src/js/parts/modals.js":
+/*!********************************!*\
+  !*** ./src/js/parts/modals.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function modals() {
+  // закрытие модальных окон
+  var btnClose = document.querySelectorAll('.popup-close');
+  btnClose.forEach(function (item) {
+    var modal = item.parentNode.parentNode.parentNode;
+    item.addEventListener('click', function () {
+      closePopup();
+    });
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closePopup();
+      }
+    });
+
+    function closePopup() {
+      modal.style.display = 'none';
+    }
+  }); // модальное окно заказа
+
+  var btnsDesign = document.querySelectorAll('.button-design'),
+      popupDesign = document.querySelector('.popup-design');
+  btnsDesign.forEach(function (item) {
+    item.addEventListener('click', function () {
+      popupDesign.style.display = 'block';
+    });
+  }); // модальное окно консультации
+
+  var btnsConsult = document.querySelectorAll('.button-consultation'),
+      popupConsult = document.querySelector('.popup-consultation');
+  btnsConsult.forEach(function (item) {
+    item.addEventListener('click', function () {
+      popupConsult.style.display = 'block';
+    });
+  });
+}
+
+module.exports = modals;
 
 /***/ }),
 
@@ -193,9 +252,11 @@ __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/f
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  var mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js");
+  var mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js"),
+      modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js");
 
   mainSlider();
+  modals();
 });
 
 /***/ })
