@@ -195,6 +195,11 @@ h4 {
   margin: 0;
   width: 20rem;
 }
+
+.header .burger-menu_active {
+  display: block;
+}
+
 .header .burger-menu li {
   padding: 2rem;
 }

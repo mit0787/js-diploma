@@ -48,10 +48,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
   prev.addEventListener('click', () => {
     plusSlides(-1);
+    feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
+    feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
   });
 
   next.addEventListener('click', () => {
     plusSlides(1);
+    feedbackSlider.forEach((item) => item.classList.remove('fadeInRight'));
+    feedbackSlider.forEach((item) => item.classList.add('fadeInLeft'));
   });
 
   // закрытие модальных окон
@@ -150,8 +154,8 @@ window.addEventListener('DOMContentLoaded', function () {
       btn = popup.querySelector('.popup-close'),
       input = form.getElementsByTagName('input');
 
-      popup.querySelector('form').style.display = 'none';
-      document.body.appendChild(popup);
+    popup.querySelector('form').style.display = 'none';
+    document.body.appendChild(popup);
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -219,9 +223,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   // валидация
   let phoneInput = document.querySelectorAll('input[name="phone"]'),
-      nameInput = document.querySelectorAll('input[name="name"]'),
-      emailInput = document.querySelectorAll('input[name="email"]'),
-      textArea = document.querySelectorAll('.input-text');
+    nameInput = document.querySelectorAll('input[name="name"]'),
+    emailInput = document.querySelectorAll('input[name="email"]'),
+    textArea = document.querySelectorAll('.input-text');
 
   phoneInput.forEach(function (item) {
     item.setAttribute('maxlength', '12');
@@ -249,5 +253,20 @@ window.addEventListener('DOMContentLoaded', function () {
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[A-Za-z]/g, '');
     });
+  });
+
+  //бургер-меню
+  let burgerMenu = document.querySelector('.burger-menu'),
+    btnBurger = document.querySelector('.burger');
+
+  document.addEventListener('click', (event) => {
+    if (screen.width <= 768) {
+      let target = event.target;
+      if (btnBurger.contains(event.target)) {
+        burgerMenu.classList.toggle('burger-menu_active');
+      } else if (!burgerMenu.contains(event.target)) {
+        burgerMenu.classList.remove('burger-menu_active');
+      }
+    }
   });
 });

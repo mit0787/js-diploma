@@ -1555,6 +1555,34 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/burgerMenu.js":
+/*!************************************!*\
+  !*** ./src/js/parts/burgerMenu.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function burgerMenu() {
+  //бургер-меню
+  var burgerMenu = document.querySelector('.burger-menu'),
+      btnBurger = document.querySelector('.burger');
+  document.addEventListener('click', function (event) {
+    if (screen.width <= 768) {
+      var target = event.target;
+
+      if (btnBurger.contains(event.target)) {
+        burgerMenu.classList.toggle('burger-menu_active');
+      } else if (!burgerMenu.contains(event.target)) {
+        burgerMenu.classList.remove('burger-menu_active');
+      }
+    }
+  });
+}
+
+module.exports = burgerMenu;
+
+/***/ }),
+
 /***/ "./src/js/parts/forms.js":
 /*!*******************************!*\
   !*** ./src/js/parts/forms.js ***!
@@ -1715,41 +1743,7 @@ function mainSlider() {
       item.style.display = 'none';
     });
     slides[0].style.display = 'block';
-  } // нижний слайдер
-
-
-  var feedbackSlider = document.querySelectorAll('.feedback-slider-item'),
-      prev = document.querySelector('.main-prev-btn'),
-      next = document.querySelector('.main-next-btn'),
-      slideIndex = 1,
-      interval = setInterval(plusSlides, 5000, 1);
-  showSlide(feedbackSlider);
-
-  function showSlides(n) {
-    if (n > feedbackSlider.length) {
-      slideIndex = 1;
-    }
-
-    if (n < 1) {
-      slideIndex = feedbackSlider.length;
-    }
-
-    feedbackSlider.forEach(function (item) {
-      return item.style.display = 'none';
-    });
-    feedbackSlider[slideIndex - 1].style.display = 'block';
   }
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  prev.addEventListener('click', function () {
-    plusSlides(-1);
-  });
-  next.addEventListener('click', function () {
-    plusSlides(1);
-  });
 }
 
 module.exports = mainSlider;
@@ -1835,6 +1829,65 @@ module.exports = modals;
 
 /***/ }),
 
+/***/ "./src/js/parts/secondSlider.js":
+/*!**************************************!*\
+  !*** ./src/js/parts/secondSlider.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function secondSlider() {
+  // нижний слайдер
+  var feedbackSlider = document.querySelectorAll('.feedback-slider-item'),
+      prev = document.querySelector('.main-prev-btn'),
+      next = document.querySelector('.main-next-btn'),
+      slideIndex = 1,
+      interval = setInterval(plusSlides, 5000, 1);
+  showSlide(feedbackSlider);
+
+  function showSlides(n) {
+    if (n > feedbackSlider.length) {
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = feedbackSlider.length;
+    }
+
+    feedbackSlider.forEach(function (item) {
+      return item.style.display = 'none';
+    });
+    feedbackSlider[slideIndex - 1].style.display = 'block';
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  prev.addEventListener('click', function () {
+    plusSlides(-1);
+    feedbackSlider.forEach(function (item) {
+      return item.classList.remove('fadeInleft');
+    });
+    feedbackSlider.forEach(function (item) {
+      return item.classList.add('fadeInRight');
+    });
+  });
+  next.addEventListener('click', function () {
+    plusSlides(1);
+    feedbackSlider.forEach(function (item) {
+      return item.classList.remove('fadeInRight');
+    });
+    feedbackSlider.forEach(function (item) {
+      return item.classList.add('fadeInLeft');
+    });
+  });
+}
+
+module.exports = secondSlider;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -1850,10 +1903,14 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   var mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js"),
+      secondSlider = __webpack_require__(/*! ./parts/secondSlider */ "./src/js/parts/secondSlider.js"),
+      burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
       modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js"),
       forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js");
 
   mainSlider();
+  secondSlider();
+  burgerMenu();
   modals();
   forms();
 });
