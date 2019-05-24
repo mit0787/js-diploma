@@ -279,8 +279,6 @@ window.addEventListener('DOMContentLoaded', function () {
   //аккордеон
   let btnAccord = document.querySelectorAll('.accordion-heading'),
     blockAccord = document.querySelectorAll('.accordion-block');
-    console.log(btnAccord);
-    console.log(blockAccord);
 
   blockAccord.forEach((item) => {
     item.style.display = 'none';
@@ -292,6 +290,21 @@ window.addEventListener('DOMContentLoaded', function () {
         item.style.display = 'none';
       });
       blockAccord[i].style.display = 'block';
+    });
+  });
+
+  // смена картинок при наведении или тапе
+  let imageBlock = document.querySelectorAll('.sizes-block');
+
+  document.addEventListener('mouseover', (event) => {
+    let target = event.target;
+    imageBlock.forEach((item, i) => {
+      let image = item.querySelector('[class^="size"]');
+      if (item.contains(event.target)) {
+        image.src = `./img/sizes-${i+1}-1.png`;
+      } else {
+        image.src = `./img/sizes-${i+1}.png`;
+      }
     });
   });
 });

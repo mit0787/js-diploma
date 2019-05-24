@@ -1566,8 +1566,6 @@ function accordion() {
   //аккордеон
   var btnAccord = document.querySelectorAll('.accordion-heading'),
       blockAccord = document.querySelectorAll('.accordion-block');
-  console.log(btnAccord);
-  console.log(blockAccord);
   blockAccord.forEach(function (item) {
     item.style.display = 'none';
   });
@@ -1750,6 +1748,34 @@ function forms() {
 }
 
 module.exports = forms;
+
+/***/ }),
+
+/***/ "./src/js/parts/images.js":
+/*!********************************!*\
+  !*** ./src/js/parts/images.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function images() {
+  // смена картинок при наведении или тапе
+  var imageBlock = document.querySelectorAll('.sizes-block');
+  document.addEventListener('mouseover', function (event) {
+    var target = event.target;
+    imageBlock.forEach(function (item, i) {
+      var image = item.querySelector('[class^="size"]');
+
+      if (item.contains(event.target)) {
+        image.src = "./img/sizes-".concat(i + 1, "-1.png");
+      } else {
+        image.src = "./img/sizes-".concat(i + 1, ".png");
+      }
+    });
+  });
+}
+
+module.exports = images;
 
 /***/ }),
 
@@ -1942,6 +1968,7 @@ window.addEventListener('DOMContentLoaded', function () {
       burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
       modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js"),
       accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
+      images = __webpack_require__(/*! ./parts/images */ "./src/js/parts/images.js"),
       forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js");
 
   mainSlider();
@@ -1949,6 +1976,7 @@ window.addEventListener('DOMContentLoaded', function () {
   burgerMenu();
   modals();
   accordion();
+  images();
   forms();
 });
 
