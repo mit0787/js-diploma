@@ -1688,21 +1688,9 @@ function mainSlider() {
 
   prev.addEventListener('click', function () {
     plusSlides(-1);
-    feedbackSlider.forEach(function (item) {
-      return item.classList.remove('fadeInleft');
-    });
-    feedbackSlider.forEach(function (item) {
-      return item.classList.add('fadeInRight');
-    });
   });
   next.addEventListener('click', function () {
     plusSlides(1);
-    feedbackSlider.forEach(function (item) {
-      return item.classList.remove('fadeInRight');
-    });
-    feedbackSlider.forEach(function (item) {
-      return item.classList.add('fadeInLeft');
-    });
   });
 }
 

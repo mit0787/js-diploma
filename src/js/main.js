@@ -48,14 +48,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
   prev.addEventListener('click', () => {
     plusSlides(-1);
-    feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
-    feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
   });
 
   next.addEventListener('click', () => {
     plusSlides(1);
-    feedbackSlider.forEach((item) => item.classList.remove('fadeInRight'));
-    feedbackSlider.forEach((item) => item.classList.add('fadeInLeft'));
   });
 
   // закрытие модальных окон
