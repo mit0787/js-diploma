@@ -1565,6 +1565,7 @@ module.exports = g;
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
 function forms() {
+  // формы
   var mainForm = document.getElementById('main-form'),
       consultForm = document.getElementById('consultation-form'),
       designForm = document.getElementById('design-form'),
@@ -1576,6 +1577,33 @@ function forms() {
   };
   sendForm(designForm);
   sendForm(consultForm);
+  sendMain(mainForm);
+
+  function sendMain(form) {
+    var popup = document.querySelector('.popup-design').cloneNode(true),
+        popupContent = popup.querySelector('.popup-content'),
+        btn = popup.querySelector('.popup-close'),
+        input = form.getElementsByTagName('input');
+    popup.querySelector('form').style.display = 'none';
+    document.body.appendChild(popup);
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      popup.style.display = 'block';
+      popupContent.appendChild(statusMassege);
+      postData(form).then(function () {
+        return statusMassege.innerHTML = message.success;
+      }).catch(function () {
+        return statusMassege.innerHTML = message.failure;
+      });
+
+      for (var i = 0; i < input.length; i++) {
+        input[i].value = '';
+      }
+    });
+    btn.addEventListener('click', function () {
+      popup.style.display = 'none';
+    });
+  }
 
   function sendForm(form) {
     var popupContent = form.parentNode,
@@ -1585,7 +1613,7 @@ function forms() {
       event.preventDefault();
       popupContent.appendChild(statusMassege);
       form.style.display = "none";
-      postData(consultForm).then(function () {
+      postData(form).then(function () {
         return statusMassege.innerHTML = message.success;
       }).catch(function () {
         return statusMassege.innerHTML = message.failure;
@@ -1625,7 +1653,37 @@ function forms() {
 
       request.send(json);
     });
-  }
+  } // валидация
+
+
+  var phoneInput = document.querySelectorAll('input[name="phone"]'),
+      nameInput = document.querySelectorAll('input[name="name"]'),
+      emailInput = document.querySelectorAll('input[name="email"]'),
+      textArea = document.querySelectorAll('.input-text');
+  phoneInput.forEach(function (item) {
+    item.setAttribute('maxlength', '12');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[^\d\+]/g, '');
+    });
+  });
+  nameInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[^А-Яа-я]/g, '');
+    });
+  });
+  emailInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[А-Яа-я]/g, '');
+    });
+  });
+  textArea.forEach(function (item) {
+    item.setAttribute('maxlength', '150');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[A-Za-z]/g, '');
+    });
+  });
 }
 
 module.exports = forms;

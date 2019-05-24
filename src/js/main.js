@@ -142,6 +142,33 @@ window.addEventListener('DOMContentLoaded', function () {
 
   sendForm(designForm);
   sendForm(consultForm);
+  sendMain(mainForm);
+
+  function sendMain(form) {
+    let popup = document.querySelector('.popup-design').cloneNode(true),
+      popupContent = popup.querySelector('.popup-content'),
+      btn = popup.querySelector('.popup-close'),
+      input = form.getElementsByTagName('input');
+
+      popup.querySelector('form').style.display = 'none';
+      document.body.appendChild(popup);
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      popup.style.display = 'block';
+      popupContent.appendChild(statusMassege);
+      postData(form)
+        .then(() => statusMassege.innerHTML = message.success)
+        .catch(() => statusMassege.innerHTML = message.failure);
+      for (let i = 0; i < input.length; i++) {
+        input[i].value = '';
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+  }
 
   function sendForm(form) {
     let popupContent = form.parentNode,
@@ -152,7 +179,7 @@ window.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
       popupContent.appendChild(statusMassege);
       form.style.display = "none";
-      postData(consultForm)
+      postData(form)
         .then(() => statusMassege.innerHTML = message.success)
         .catch(() => statusMassege.innerHTML = message.failure);
       for (let i = 0; i < input.length; i++) {
@@ -189,4 +216,38 @@ window.addEventListener('DOMContentLoaded', function () {
       request.send(json);
     });
   }
+
+  // валидация
+  let phoneInput = document.querySelectorAll('input[name="phone"]'),
+      nameInput = document.querySelectorAll('input[name="name"]'),
+      emailInput = document.querySelectorAll('input[name="email"]'),
+      textArea = document.querySelectorAll('.input-text');
+
+  phoneInput.forEach(function (item) {
+    item.setAttribute('maxlength', '12');
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/[^\d\+]/g, '');
+    });
+  });
+
+  nameInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/[^А-Яа-я]/g, '');
+    });
+  });
+
+  emailInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/[А-Яа-я]/g, '');
+    });
+  });
+
+  textArea.forEach(function (item) {
+    item.setAttribute('maxlength', '150');
+    item.addEventListener('input', () => {
+      item.value = item.value.replace(/[A-Za-z]/g, '');
+    });
+  });
 });
