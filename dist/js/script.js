@@ -1555,6 +1555,36 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/accordion.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/accordion.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function accordion() {
+  //аккордеон
+  var btnAccord = document.querySelectorAll('.accordion-heading'),
+      blockAccord = document.querySelectorAll('.accordion-block');
+  console.log(btnAccord);
+  console.log(blockAccord);
+  blockAccord.forEach(function (item) {
+    item.style.display = 'none';
+  });
+  btnAccord.forEach(function (item, i) {
+    item.addEventListener('click', function () {
+      blockAccord.forEach(function (item) {
+        item.style.display = 'none';
+      });
+      blockAccord[i].style.display = 'block';
+    });
+  });
+}
+
+module.exports = accordion;
+
+/***/ }),
+
 /***/ "./src/js/parts/burgerMenu.js":
 /*!************************************!*\
   !*** ./src/js/parts/burgerMenu.js ***!
@@ -1575,6 +1605,11 @@ function burgerMenu() {
       } else if (!burgerMenu.contains(event.target)) {
         burgerMenu.classList.remove('burger-menu_active');
       }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (screen.width > 768) {
+      burgerMenu.classList.remove('burger-menu_active');
     }
   });
 }
@@ -1906,12 +1941,14 @@ window.addEventListener('DOMContentLoaded', function () {
       secondSlider = __webpack_require__(/*! ./parts/secondSlider */ "./src/js/parts/secondSlider.js"),
       burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
       modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js"),
+      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
       forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js");
 
   mainSlider();
   secondSlider();
   burgerMenu();
   modals();
+  accordion();
   forms();
 });
 

@@ -7,12 +7,13 @@ window.addEventListener('DOMContentLoaded', function () {
     secondSlider = require('./parts/secondSlider'),
     burgerMenu = require('./parts/burgerMenu'),
     modals = require('./parts/modals'),
+    accordion = require('./parts/accordion'),
     forms = require('./parts/forms');
 
   mainSlider();
   secondSlider();
   burgerMenu();
   modals();
+  accordion();
   forms();
-
 });

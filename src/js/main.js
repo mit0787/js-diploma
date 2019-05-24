@@ -269,4 +269,29 @@ window.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  window.addEventListener('resize', () => {
+    if (screen.width > 768) {
+      burgerMenu.classList.remove('burger-menu_active');
+    }
+  });
+
+  //аккордеон
+  let btnAccord = document.querySelectorAll('.accordion-heading'),
+    blockAccord = document.querySelectorAll('.accordion-block');
+    console.log(btnAccord);
+    console.log(blockAccord);
+
+  blockAccord.forEach((item) => {
+    item.style.display = 'none';
+  });
+
+  btnAccord.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      blockAccord.forEach((item) => {
+        item.style.display = 'none';
+      });
+      blockAccord[i].style.display = 'block';
+    });
+  });
 });

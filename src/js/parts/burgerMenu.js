@@ -13,6 +13,12 @@ function burgerMenu() {
       }
     }
   });
+
+  window.addEventListener('resize', () => {
+    if (screen.width > 768) {
+      burgerMenu.classList.remove('burger-menu_active');
+    }
+  });
 }
 
 module.exports = burgerMenu;
