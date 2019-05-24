@@ -4,9 +4,11 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   let mainSlider = require('./parts/mainSlider'),
-    modals = require('./parts/modals');
+    modals = require('./parts/modals'),
+    forms = require('./parts/forms');
 
   mainSlider();
   modals();
+  forms();
 
 });
