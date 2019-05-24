@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function () {
     slideIndex = 1,
     interval = setInterval(plusSlides, 5000, 1);
 
-  showSlide(feedbackSlider);
+    showSlides(slideIndex);
 
   function showSlides(n) {
     if (n > feedbackSlider.length) {
@@ -44,18 +44,23 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function plusSlides(n) {
     showSlides(slideIndex += n);
+    clearInterval(interval);
+    interval = setInterval(plusSlides, 5000, 1);
+    if (n > 0) {
+      feedbackSlider.forEach((item) => item.classList.remove('fadeInRight'));
+      feedbackSlider.forEach((item) => item.classList.add('fadeInLeft'));
+    } else {
+      feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
+      feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
+    }
   }
 
   prev.addEventListener('click', () => {
     plusSlides(-1);
-    feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
-    feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
   });
 
   next.addEventListener('click', () => {
     plusSlides(1);
-    feedbackSlider.forEach((item) => item.classList.remove('fadeInRight'));
-    feedbackSlider.forEach((item) => item.classList.add('fadeInLeft'));
   });
 
   // закрытие модальных окон

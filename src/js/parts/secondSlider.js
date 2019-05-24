@@ -6,35 +6,40 @@ function secondSlider() {
     slideIndex = 1,
     interval = setInterval(plusSlides, 5000, 1);
 
-    showSlide(feedbackSlider);
+    showSlides(slideIndex);
 
-    function showSlides(n) {
-      if (n > feedbackSlider.length) {
-        slideIndex = 1;
-      }
-  
-      if (n < 1) {
-        slideIndex = feedbackSlider.length;
-      }
-      feedbackSlider.forEach((item) => item.style.display = 'none');
-      feedbackSlider[slideIndex - 1].style.display = 'block';
+  function showSlides(n) {
+    if (n > feedbackSlider.length) {
+      slideIndex = 1;
     }
-  
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
+
+    if (n < 1) {
+      slideIndex = feedbackSlider.length;
     }
-  
-    prev.addEventListener('click', () => {
-      plusSlides(-1);
-      feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
-      feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
-    });
-  
-    next.addEventListener('click', () => {
-      plusSlides(1);
+    feedbackSlider.forEach((item) => item.style.display = 'none');
+    feedbackSlider[slideIndex - 1].style.display = 'block';
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+    clearInterval(interval);
+    interval = setInterval(plusSlides, 5000, 1);
+    if (n > 0) {
       feedbackSlider.forEach((item) => item.classList.remove('fadeInRight'));
       feedbackSlider.forEach((item) => item.classList.add('fadeInLeft'));
-    });
+    } else {
+      feedbackSlider.forEach((item) => item.classList.remove('fadeInleft'));
+      feedbackSlider.forEach((item) => item.classList.add('fadeInRight'));
+    }
+  }
+
+  prev.addEventListener('click', () => {
+    plusSlides(-1);
+  });
+
+  next.addEventListener('click', () => {
+    plusSlides(1);
+  });
 }
 
 module.exports = secondSlider;

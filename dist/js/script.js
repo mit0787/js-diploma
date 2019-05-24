@@ -1904,7 +1904,7 @@ function secondSlider() {
       next = document.querySelector('.main-next-btn'),
       slideIndex = 1,
       interval = setInterval(plusSlides, 5000, 1);
-  showSlide(feedbackSlider);
+  showSlides(slideIndex);
 
   function showSlides(n) {
     if (n > feedbackSlider.length) {
@@ -1923,25 +1923,31 @@ function secondSlider() {
 
   function plusSlides(n) {
     showSlides(slideIndex += n);
+    clearInterval(interval);
+    interval = setInterval(plusSlides, 5000, 1);
+
+    if (n > 0) {
+      feedbackSlider.forEach(function (item) {
+        return item.classList.remove('fadeInRight');
+      });
+      feedbackSlider.forEach(function (item) {
+        return item.classList.add('fadeInLeft');
+      });
+    } else {
+      feedbackSlider.forEach(function (item) {
+        return item.classList.remove('fadeInleft');
+      });
+      feedbackSlider.forEach(function (item) {
+        return item.classList.add('fadeInRight');
+      });
+    }
   }
 
   prev.addEventListener('click', function () {
     plusSlides(-1);
-    feedbackSlider.forEach(function (item) {
-      return item.classList.remove('fadeInleft');
-    });
-    feedbackSlider.forEach(function (item) {
-      return item.classList.add('fadeInRight');
-    });
   });
   next.addEventListener('click', function () {
     plusSlides(1);
-    feedbackSlider.forEach(function (item) {
-      return item.classList.remove('fadeInRight');
-    });
-    feedbackSlider.forEach(function (item) {
-      return item.classList.add('fadeInLeft');
-    });
   });
 }
 
