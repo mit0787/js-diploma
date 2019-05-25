@@ -1583,6 +1583,48 @@ module.exports = accordion;
 
 /***/ }),
 
+/***/ "./src/js/parts/blocks.js":
+/*!********************************!*\
+  !*** ./src/js/parts/blocks.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function blocks() {
+  // подгрузка блоков
+  var styleBlock = document.querySelectorAll('.styles-block'),
+      btnStyles = document.querySelector('.button-styles');
+  btnStyles.addEventListener('click', function () {
+    this.style.display = 'none';
+    styleBlock.forEach(function (item) {
+      var styleParent = item.parentNode,
+          newStyles = styleBlock[0].parentNode.classList;
+
+      if (styleParent.classList.contains('styles-2')) {
+        var _styleParent$classLis, _styleParent$classLis2;
+
+        var itemClass = styleParent.classList;
+
+        (_styleParent$classLis = styleParent.classList).remove.apply(_styleParent$classLis, _toConsumableArray(itemClass));
+
+        (_styleParent$classLis2 = styleParent.classList).add.apply(_styleParent$classLis2, _toConsumableArray(newStyles));
+      }
+    });
+  });
+}
+
+module.exports = blocks;
+
+/***/ }),
+
 /***/ "./src/js/parts/burgerMenu.js":
 /*!************************************!*\
   !*** ./src/js/parts/burgerMenu.js ***!
@@ -2082,6 +2124,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   var burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
       mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js"),
+      blocks = __webpack_require__(/*! ./parts/blocks */ "./src/js/parts/blocks.js"),
       calc = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js"),
       images = __webpack_require__(/*! ./parts/images */ "./src/js/parts/images.js"),
@@ -2092,6 +2135,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   burgerMenu();
   mainSlider();
+  blocks();
   calc();
   tabs();
   images();

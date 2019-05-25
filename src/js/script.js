@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   let burgerMenu = require('./parts/burgerMenu'),
     mainSlider = require('./parts/mainSlider'),
+    blocks = require('./parts/blocks'),
     calc = require('./parts/calc'),
     tabs = require('./parts/tabs'),
     images = require('./parts/images'),
@@ -15,6 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   burgerMenu();
   mainSlider();
+  blocks();
   calc();
   tabs();
   images();
