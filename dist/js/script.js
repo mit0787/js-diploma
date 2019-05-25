@@ -1807,37 +1807,7 @@ function forms() {
 
       request.send(json);
     });
-  } // валидация
-
-
-  var phoneInput = document.querySelectorAll('input[name="phone"]'),
-      nameInput = document.querySelectorAll('input[name="name"]'),
-      emailInput = document.querySelectorAll('input[name="email"]'),
-      textArea = document.querySelectorAll('.input-text');
-  phoneInput.forEach(function (item) {
-    item.setAttribute('maxlength', '12');
-    item.addEventListener('input', function () {
-      item.value = item.value.replace(/[^\d\+]/g, '');
-    });
-  });
-  nameInput.forEach(function (item) {
-    item.setAttribute('maxlength', '50');
-    item.addEventListener('input', function () {
-      item.value = item.value.replace(/[^А-Яа-я]/g, '');
-    });
-  });
-  emailInput.forEach(function (item) {
-    item.setAttribute('maxlength', '50');
-    item.addEventListener('input', function () {
-      item.value = item.value.replace(/[А-Яа-я]/g, '');
-    });
-  });
-  textArea.forEach(function (item) {
-    item.setAttribute('maxlength', '150');
-    item.addEventListener('input', function () {
-      item.value = item.value.replace(/[A-Za-z]/g, '');
-    });
-  });
+  }
 }
 
 module.exports = forms;
@@ -1962,7 +1932,6 @@ function modals() {
   var height = document.body.getBoundingClientRect().height,
       timeout = setTimeout(function () {
     if (window.pageYOffset < screen.height) {
-      console.log(window.pageYOffset);
       window.addEventListener('scroll', openGift);
     }
   }, 1000);
@@ -1975,11 +1944,16 @@ function modals() {
     }
   }
 
+  document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('button')) {
+      window.removeEventListener('scroll', openGift);
+    }
+  });
+
   function openModal(modal) {
     modal.style.display = 'block';
     clearTimeout(consultTimer);
     document.body.style.overflow = 'hidden';
-    window.removeEventListener('scroll', openGift);
   }
 }
 
@@ -2088,6 +2062,85 @@ module.exports = tabs;
 
 /***/ }),
 
+/***/ "./src/js/parts/validation.js":
+/*!************************************!*\
+  !*** ./src/js/parts/validation.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function validation() {
+  // валидация
+  var phoneInput = document.querySelectorAll('input[name="phone"]'),
+      nameInput = document.querySelectorAll('input[name="name"]'),
+      emailInput = document.querySelectorAll('input[name="email"]'),
+      textArea = document.querySelectorAll('.input-text');
+  phoneInput.forEach(function (item) {
+    item.addEventListener("input", mask, false);
+    item.addEventListener("focus", mask, false);
+    item.addEventListener("blur", mask, false);
+  });
+  nameInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[^А-Яа-я]/g, '');
+    });
+  });
+  emailInput.forEach(function (item) {
+    item.setAttribute('maxlength', '50');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[А-Яа-я]/g, '');
+    });
+  });
+  textArea.forEach(function (item) {
+    item.setAttribute('maxlength', '150');
+    item.addEventListener('input', function () {
+      item.value = item.value.replace(/[A-Za-z]/g, '');
+    });
+  });
+
+  function mask(event) {
+    var matrix = "+7 (___) ___ ____",
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+
+    if (def.length >= val.length) {
+      val = def;
+    }
+
+    this.value = matrix.replace(/./g, function (a) {
+      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+    });
+
+    if (event.type == "blur") {
+      if (this.value.length == 2) {
+        this.value = "";
+      }
+    } else {
+      setCursorPosition(this.value.length, this);
+    }
+  }
+
+  function setCursorPosition(pos, elem) {
+    elem.focus();
+
+    if (elem.setSelectionRange) {
+      elem.setSelectionRange(pos, pos);
+    } else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  }
+}
+
+module.exports = validation;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -2111,6 +2164,7 @@ window.addEventListener('DOMContentLoaded', function () {
       secondSlider = __webpack_require__(/*! ./parts/secondSlider */ "./src/js/parts/secondSlider.js"),
       accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
       forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js"),
+      validation = __webpack_require__(/*! ./parts/validation */ "./src/js/parts/validation.js"),
       modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js");
 
   burgerMenu();
@@ -2122,6 +2176,7 @@ window.addEventListener('DOMContentLoaded', function () {
   secondSlider();
   accordion();
   forms();
+  validation();
   modals();
 });
 

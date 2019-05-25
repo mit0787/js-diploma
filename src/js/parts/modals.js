@@ -58,7 +58,6 @@ function modals() {
   let height = document.body.getBoundingClientRect().height,
     timeout = setTimeout(() => {
       if (window.pageYOffset < screen.height) {
-        console.log(window.pageYOffset);
         window.addEventListener('scroll', openGift);
       }
     }, 1000);
@@ -71,11 +70,16 @@ function modals() {
     }
   }
 
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('button')) {
+      window.removeEventListener('scroll', openGift);
+    }
+  });
+
   function openModal(modal) {
     modal.style.display = 'block';
     clearTimeout(consultTimer);
     document.body.style.overflow = 'hidden';
-    window.removeEventListener('scroll', openGift);
   }
 }
 

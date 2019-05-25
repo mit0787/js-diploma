@@ -65,40 +65,6 @@ function forms() {
       request.send(json);
     });
   }
-
-  // валидация
-  let phoneInput = document.querySelectorAll('input[name="phone"]'),
-    nameInput = document.querySelectorAll('input[name="name"]'),
-    emailInput = document.querySelectorAll('input[name="email"]'),
-    textArea = document.querySelectorAll('.input-text');
-
-  phoneInput.forEach(function (item) {
-    item.setAttribute('maxlength', '12');
-    item.addEventListener('input', () => {
-      item.value = item.value.replace(/[^\d\+]/g, '');
-    });
-  });
-
-  nameInput.forEach(function (item) {
-    item.setAttribute('maxlength', '50');
-    item.addEventListener('input', () => {
-      item.value = item.value.replace(/[^А-Яа-я]/g, '');
-    });
-  });
-
-  emailInput.forEach(function (item) {
-    item.setAttribute('maxlength', '50');
-    item.addEventListener('input', () => {
-      item.value = item.value.replace(/[А-Яа-я]/g, '');
-    });
-  });
-
-  textArea.forEach(function (item) {
-    item.setAttribute('maxlength', '150');
-    item.addEventListener('input', () => {
-      item.value = item.value.replace(/[A-Za-z]/g, '');
-    });
-  });
 }
 
 module.exports = forms;

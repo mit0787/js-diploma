@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
     secondSlider = require('./parts/secondSlider'),
     accordion = require('./parts/accordion'),
     forms = require('./parts/forms'),
+    validation = require('./parts/validation'),
     modals = require('./parts/modals');
 
   burgerMenu();
@@ -23,5 +24,6 @@ window.addEventListener('DOMContentLoaded', function () {
   secondSlider();
   accordion();
   forms();
+  validation();
   modals();
 });
