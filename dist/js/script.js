@@ -1743,63 +1743,43 @@ function forms() {
   var mainForm = document.getElementById('main-form'),
       consultForm = document.getElementById('consultation-form'),
       designForm = document.getElementById('design-form'),
-      statusMassege = document.createElement('div'),
+      popup = document.querySelector('.popup-design').cloneNode(true),
+      popupForm = popup.querySelector('form'),
       message = {
-    loading: 'Загрузка...',
-    success: '<div style="display: flex; flex-direction: column; justify-content: space-between;"><p style="margin: auto;">Спасибо! Скоро мы с вами свяжемся</p><img  style="width: 70px; margin: auto;" src="./img/face.svg"></div>',
-    failure: '<div style="display: flex; flex-direction: column; justify-content: space-between;"><p style="margin: auto;">Что-то пошло не так...</p><img  style="width: 70px; margin: auto;" src="./img/error.svg"></div>'
+    loading: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Загрузка...</h4><img  style="width: 70px; margin: auto;" src="./img/loader.gif"></div>',
+    success: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Спасибо! Скоро мы с вами свяжемся</h4><img  style="width: 70px; margin: auto;" src="./img/face.svg"></div>',
+    failure: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Что-то пошло не так...</h4><img  style="width: 70px; margin: auto;" src="./img/error.svg"></div>'
   };
+  document.body.appendChild(popup);
+  popup.addEventListener('click', function (event) {
+    if (event.target.classList.contains('popup-close')) {
+      this.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
   sendForm(designForm);
   sendForm(consultForm);
-  sendMain(mainForm);
+  sendForm(mainForm);
 
-  function sendMain(form) {
-    var popup = document.querySelector('.popup-design').cloneNode(true),
-        popupContent = popup.querySelector('.popup-content'),
-        btn = popup.querySelector('.popup-close'),
-        input = form.getElementsByTagName('input');
-    popup.querySelector('form').style.display = 'none';
-    document.body.appendChild(popup);
+  function sendForm(form) {
+    var input = form.getElementsByTagName('input');
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       popup.style.display = 'block';
-      popupContent.appendChild(statusMassege);
+
+      if (form.parentNode.classList.contains('popup-content')) {
+        form.parentNode.parentNode.parentNode.style.display = 'none';
+      }
+
       postData(form).then(function () {
-        return statusMassege.innerHTML = message.success;
+        return popupForm.innerHTML = message.success;
       }).catch(function () {
-        return statusMassege.innerHTML = message.failure;
+        return popupForm.innerHTML = message.failure;
       });
 
       for (var i = 0; i < input.length; i++) {
         input[i].value = '';
       }
-    });
-    btn.addEventListener('click', function () {
-      popup.style.display = 'none';
-    });
-  }
-
-  function sendForm(form) {
-    var popupContent = form.parentNode,
-        input = form.getElementsByTagName('input'),
-        btnClose = form.parentNode.querySelector('.popup-close');
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      popupContent.appendChild(statusMassege);
-      form.style.display = "none";
-      postData(form).then(function () {
-        return statusMassege.innerHTML = message.success;
-      }).catch(function () {
-        return statusMassege.innerHTML = message.failure;
-      });
-
-      for (var i = 0; i < input.length; i++) {
-        input[i].value = '';
-      }
-    });
-    btnClose.addEventListener('click', function () {
-      form.style.display = "block";
-      statusMassege.innerHTML = "";
     });
   }
 
@@ -1817,7 +1797,7 @@ function forms() {
 
       request.onreadystatechange = function () {
         if (request.readyState < 4) {
-          statusMassege.innerHTML = message.loading;
+          popupForm.innerHTML = message.loading;
         } else if (request.readyState === 4 && request.status == 200) {
           resolve();
         } else {
