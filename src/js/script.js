@@ -3,21 +3,23 @@ require('formdata-polyfill')
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  let mainSlider = require('./parts/mainSlider'),
-    secondSlider = require('./parts/secondSlider'),
-    burgerMenu = require('./parts/burgerMenu'),
-    modals = require('./parts/modals'),
-    accordion = require('./parts/accordion'),
-    images = require('./parts/images'),
+  let burgerMenu = require('./parts/burgerMenu'),
+    mainSlider = require('./parts/mainSlider'),
+    calc = require('./parts/calc'),
     tabs = require('./parts/tabs'),
-    forms = require('./parts/forms');
+    images = require('./parts/images'),
+    secondSlider = require('./parts/secondSlider'),
+    accordion = require('./parts/accordion'),
+    forms = require('./parts/forms'),
+    modals = require('./parts/modals');
 
-  mainSlider();
-  secondSlider();
   burgerMenu();
-  modals();
-  accordion();
-  images();
+  mainSlider();
+  calc();
   tabs();
+  images();
+  secondSlider();
+  accordion();
   forms();
+  modals();
 });

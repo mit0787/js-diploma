@@ -60,7 +60,7 @@ function modals() {
       if (window.pageYOffset < screen.height) {
         console.log(window.pageYOffset);
         window.addEventListener('scroll', openGift);
-      }    
+      }
     }, 1000);
 
   function openGift() {

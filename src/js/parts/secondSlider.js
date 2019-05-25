@@ -6,7 +6,7 @@ function secondSlider() {
     slideIndex = 1,
     interval = setInterval(plusSlides, 5000, 1);
 
-    showSlides(slideIndex);
+  showSlides(slideIndex);
 
   function showSlides(n) {
     if (n > feedbackSlider.length) {

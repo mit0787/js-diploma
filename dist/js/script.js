@@ -1616,6 +1616,77 @@ module.exports = burgerMenu;
 
 /***/ }),
 
+/***/ "./src/js/parts/calc.js":
+/*!******************************!*\
+  !*** ./src/js/parts/calc.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function calc() {
+  // калькулятор
+  var size = document.getElementById('size'),
+      material = document.getElementById('material'),
+      options = document.getElementById('options'),
+      promocode = document.querySelector('.promocode'),
+      price = document.querySelector('.calc-price'),
+      sizePrice = 0,
+      materialPrice = 0,
+      optionsPrice = 0,
+      promo = 0,
+      defaultValue = price.innerHTML;
+  size.addEventListener('change', function () {
+    sizePrice = +this.value;
+    var sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+
+    if (materialPrice > 0 && !isNaN(sizePrice) && !isNaN(materialPrice)) {
+      price.innerHTML = sum;
+    } else {
+      price.innerHTML = defaultValue;
+    }
+  });
+  material.addEventListener('change', function () {
+    materialPrice = +this.value;
+    var sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+
+    if (sizePrice > 0 && !isNaN(sizePrice) && !isNaN(materialPrice)) {
+      price.innerHTML = sum;
+    } else {
+      price.innerHTML = defaultValue;
+    }
+  });
+  options.addEventListener('change', function () {
+    optionsPrice = +this.value;
+
+    if (isNaN(optionsPrice)) {
+      optionsPrice = 0;
+    }
+
+    var sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+
+    if (sizePrice > 0 && materialPrice > 0) {
+      price.innerHTML = sum;
+    }
+  });
+  promocode.addEventListener('input', function () {
+    if (this.value === 'IWANTPOPART') {
+      promo = 30;
+    } else {
+      promo = 0;
+    }
+
+    var sum = (sizePrice + materialPrice + optionsPrice) * (100 - promo) / 100;
+
+    if (sizePrice > 0 && materialPrice > 0) {
+      price.innerHTML = sum;
+    }
+  });
+}
+
+module.exports = calc;
+
+/***/ }),
+
 /***/ "./src/js/parts/forms.js":
 /*!*******************************!*\
   !*** ./src/js/parts/forms.js ***!
@@ -2009,23 +2080,25 @@ __webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/f
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  var mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js"),
-      secondSlider = __webpack_require__(/*! ./parts/secondSlider */ "./src/js/parts/secondSlider.js"),
-      burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
-      modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js"),
-      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
-      images = __webpack_require__(/*! ./parts/images */ "./src/js/parts/images.js"),
+  var burgerMenu = __webpack_require__(/*! ./parts/burgerMenu */ "./src/js/parts/burgerMenu.js"),
+      mainSlider = __webpack_require__(/*! ./parts/mainSlider */ "./src/js/parts/mainSlider.js"),
+      calc = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js"),
-      forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js");
+      images = __webpack_require__(/*! ./parts/images */ "./src/js/parts/images.js"),
+      secondSlider = __webpack_require__(/*! ./parts/secondSlider */ "./src/js/parts/secondSlider.js"),
+      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
+      forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js"),
+      modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js");
 
-  mainSlider();
-  secondSlider();
   burgerMenu();
-  modals();
-  accordion();
-  images();
+  mainSlider();
+  calc();
   tabs();
+  images();
+  secondSlider();
+  accordion();
   forms();
+  modals();
 });
 
 /***/ })

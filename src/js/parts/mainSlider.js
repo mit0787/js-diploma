@@ -4,7 +4,7 @@ function mainSlider() {
     currentSlide = 0,
     slideInterval = setInterval(flipSlide, 5000);
 
-    showSlide(mainSlider);
+  showSlide(mainSlider);
 
   function flipSlide() {
     mainSlider[currentSlide].style.display = 'none';

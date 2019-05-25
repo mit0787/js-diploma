@@ -20,8 +20,8 @@ function forms() {
       btn = popup.querySelector('.popup-close'),
       input = form.getElementsByTagName('input');
 
-      popup.querySelector('form').style.display = 'none';
-      document.body.appendChild(popup);
+    popup.querySelector('form').style.display = 'none';
+    document.body.appendChild(popup);
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -89,9 +89,9 @@ function forms() {
 
   // валидация
   let phoneInput = document.querySelectorAll('input[name="phone"]'),
-      nameInput = document.querySelectorAll('input[name="name"]'),
-      emailInput = document.querySelectorAll('input[name="email"]'),
-      textArea = document.querySelectorAll('.input-text');
+    nameInput = document.querySelectorAll('input[name="name"]'),
+    emailInput = document.querySelectorAll('input[name="email"]'),
+    textArea = document.querySelectorAll('.input-text');
 
   phoneInput.forEach(function (item) {
     item.setAttribute('maxlength', '12');
