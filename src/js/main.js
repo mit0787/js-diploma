@@ -119,9 +119,13 @@ window.addEventListener('DOMContentLoaded', function () {
     btnsGift.style.display = 'none';
   });
 
-  let height = document.body.getBoundingClientRect().bottom;
-
-  window.addEventListener('scroll', openGift);
+  let height = document.body.getBoundingClientRect().height,
+    timeout = setTimeout(() => {
+      if (window.pageYOffset < screen.height) {
+        console.log(window.pageYOffset);
+        window.addEventListener('scroll', openGift);
+      }    
+    }, 1000);
 
   function openGift() {
     if (window.pageYOffset + window.outerHeight > height) {

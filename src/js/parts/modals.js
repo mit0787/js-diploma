@@ -21,13 +21,6 @@ function modals() {
     }
   });
 
-  function openModal(modal) {
-    modal.style.display = 'block';
-    clearTimeout(consultTimer);
-    document.body.style.overflow = 'hidden';
-    window.removeEventListener('scroll', openGift);
-  }
-
   // модальное окно заказа
   let btnsDesign = document.querySelectorAll('.button-design'),
     popupDesign = document.querySelector('.popup-design');
@@ -62,9 +55,13 @@ function modals() {
     btnsGift.style.display = 'none';
   });
 
-  let height = document.body.getBoundingClientRect().bottom + window.pageYOffset;
-
-  window.addEventListener('scroll', openGift);
+  let height = document.body.getBoundingClientRect().height,
+    timeout = setTimeout(() => {
+      if (window.pageYOffset < screen.height) {
+        console.log(window.pageYOffset);
+        window.addEventListener('scroll', openGift);
+      }    
+    }, 1000);
 
   function openGift() {
     if (window.pageYOffset + window.outerHeight > height) {
@@ -72,6 +69,13 @@ function modals() {
       btnsGift.style.display = 'none';
       window.removeEventListener('scroll', openGift);
     }
+  }
+
+  function openModal(modal) {
+    modal.style.display = 'block';
+    clearTimeout(consultTimer);
+    document.body.style.overflow = 'hidden';
+    window.removeEventListener('scroll', openGift);
   }
 }
 
