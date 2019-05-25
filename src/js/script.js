@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', function () {
     modals = require('./parts/modals'),
     accordion = require('./parts/accordion'),
     images = require('./parts/images'),
+    tabs = require('./parts/tabs'),
     forms = require('./parts/forms');
 
   mainSlider();
@@ -17,5 +18,6 @@ window.addEventListener('DOMContentLoaded', function () {
   modals();
   accordion();
   images();
+  tabs();
   forms();
 });

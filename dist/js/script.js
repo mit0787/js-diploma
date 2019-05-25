@@ -1955,6 +1955,42 @@ module.exports = secondSlider;
 
 /***/ }),
 
+/***/ "./src/js/parts/tabs.js":
+/*!******************************!*\
+  !*** ./src/js/parts/tabs.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function tabs() {
+  // табы
+  var tab = document.querySelectorAll('.portfolio-menu li'),
+      portfolio = document.querySelector('.portfolio-menu'),
+      tabContent = document.querySelectorAll('.portfolio-block'),
+      noPortfolio = document.querySelector('.portfolio-no');
+  portfolio.addEventListener('click', function (event) {
+    var target = event.target,
+        tabClass = target.classList[0];
+    noPortfolio.style.display = 'block';
+    tab.forEach(function (item) {
+      item.classList.remove('active');
+    });
+    target.classList.add('active');
+    tabContent.forEach(function (item) {
+      item.style.display = 'none';
+
+      if (item.classList.contains(tabClass)) {
+        item.style.display = 'block';
+        noPortfolio.style.display = 'none';
+      }
+    });
+  });
+}
+
+module.exports = tabs;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -1975,6 +2011,7 @@ window.addEventListener('DOMContentLoaded', function () {
       modals = __webpack_require__(/*! ./parts/modals */ "./src/js/parts/modals.js"),
       accordion = __webpack_require__(/*! ./parts/accordion */ "./src/js/parts/accordion.js"),
       images = __webpack_require__(/*! ./parts/images */ "./src/js/parts/images.js"),
+      tabs = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js"),
       forms = __webpack_require__(/*! ./parts/forms */ "./src/js/parts/forms.js");
 
   mainSlider();
@@ -1983,6 +2020,7 @@ window.addEventListener('DOMContentLoaded', function () {
   modals();
   accordion();
   images();
+  tabs();
   forms();
 });
 
