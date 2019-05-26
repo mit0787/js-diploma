@@ -153,9 +153,9 @@ window.addEventListener('DOMContentLoaded', function () {
     popup = document.querySelector('.popup-design').cloneNode(true),
     popupForm = popup.querySelector('form'),
     message = {
-      loading: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Загрузка...</h4><img  style="width: 70px; margin: auto;" src="./img/loader.gif"></div>',
-      success: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Спасибо! Скоро мы с вами свяжемся</h4><img  style="width: 70px; margin: auto;" src="./img/face.svg"></div>',
-      failure: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Что-то пошло не так...</h4><img  style="width: 70px; margin: auto;" src="./img/error.svg"></div>',
+      loading: '<div class="message"><h4>Загрузка...</h4><img src="./img/loader.gif"></div>',
+      success: '<div class="message"><h4>Спасибо! Скоро мы с вами свяжемся</h4><img src="./img/face.svg"></div>',
+      failure: '<div class="message"><h4>Что-то пошло не так...</h4><img src="./img/error.svg"></div>',
     };
 
   document.body.appendChild(popup);
@@ -173,7 +173,7 @@ window.addEventListener('DOMContentLoaded', function () {
   function sendForm(form) {
     let input = form.getElementsByTagName('input');
 
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
       popup.style.display = 'block';
       if (form.parentNode.classList.contains('popup-content')) {
@@ -191,12 +191,12 @@ window.addEventListener('DOMContentLoaded', function () {
   function postData(data) {
     let formData = new FormData(data);
     let obj = {};
-    formData.forEach(function (value, key) {
+    formData.forEach((value, key) => {
       obj[key] = value;
     });
     let json = JSON.stringify(obj);
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       let request = new XMLHttpRequest();
       request.open('POST', 'server.php');
       request.setRequestHeader('Content-Type', 'application/json; charset = utf-8');
@@ -219,27 +219,27 @@ window.addEventListener('DOMContentLoaded', function () {
     emailInput = document.querySelectorAll('input[name="email"]'),
     textArea = document.querySelectorAll('.input-text');
 
-  phoneInput.forEach(function (item) {
+  phoneInput.forEach((item) => {
     item.addEventListener("input", mask, false);
     item.addEventListener("focus", mask, false);
     item.addEventListener("blur", mask, false);
   });
 
-  nameInput.forEach(function (item) {
+  nameInput.forEach((item) => {
     item.setAttribute('maxlength', '50');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[^А-Яа-я]/g, '');
     });
   });
 
-  emailInput.forEach(function (item) {
+  emailInput.forEach((item) => {
     item.setAttribute('maxlength', '50');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[А-Яа-я]/g, '');
     });
   });
 
-  textArea.forEach(function (item) {
+  textArea.forEach((item) => {
     item.setAttribute('maxlength', '150');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[A-Za-z]/g, '');
@@ -313,9 +313,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
   btnAccord.forEach((item, i) => {
     item.addEventListener('click', () => {
+      btnAccord.forEach((item, i) => {
+        item.classList.remove('active');
+      });
       blockAccord.forEach((item) => {
         item.style.display = 'none';
       });
+      item.classList.add('active');
       blockAccord[i].style.display = 'block';
     });
   });
@@ -326,11 +330,21 @@ window.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('mouseover', (event) => {
     let target = event.target;
     imageBlock.forEach((item, i) => {
-      let image = item.querySelector('[class^="size"]');
+      let image = item.querySelector('img[class^="size"]');
+      let text = item.querySelectorAll('p');
       if (item.contains(event.target)) {
         image.src = `./img/sizes-${i+1}-1.png`;
+        text.forEach((item) => {
+          item.style.display = 'none';
+          if (item.classList.contains('sizes-hit')) {
+            item.style.display = 'block';
+          }
+        });
       } else {
         image.src = `./img/sizes-${i+1}.png`;
+        text.forEach((item) => {
+          item.style.display = 'block';
+        });
       }
     });
   });

@@ -912,6 +912,10 @@ h4 {
 .often-questions .accordion-heading span {
   border-bottom: 2px dotted #333;
 }
+.often-questions .active span{
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
 .often-questions .accordion-block {
   margin-top: 6rem;
   background-color: #f7e7e6;
@@ -1236,6 +1240,18 @@ h4 {
   color: black;
   text-align: center;
   font-family: 'Circe Bold', sans-serif;
+}
+form .message {
+  display: block; 
+  min-height: 150px;
+}
+form .message h4 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+form .message img {
+  width: 70px;
+  margin: auto;
 }
 .popup-design .button-order {
   width: 100%;

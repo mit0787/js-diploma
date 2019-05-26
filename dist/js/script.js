@@ -1571,9 +1571,13 @@ function accordion() {
   });
   btnAccord.forEach(function (item, i) {
     item.addEventListener('click', function () {
+      btnAccord.forEach(function (item, i) {
+        item.classList.remove('active');
+      });
       blockAccord.forEach(function (item) {
         item.style.display = 'none';
       });
+      item.classList.add('active');
       blockAccord[i].style.display = 'block';
     });
   });
@@ -1746,9 +1750,9 @@ function forms() {
       popup = document.querySelector('.popup-design').cloneNode(true),
       popupForm = popup.querySelector('form'),
       message = {
-    loading: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Загрузка...</h4><img  style="width: 70px; margin: auto;" src="./img/loader.gif"></div>',
-    success: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Спасибо! Скоро мы с вами свяжемся</h4><img  style="width: 70px; margin: auto;" src="./img/face.svg"></div>',
-    failure: '<div style="display: block; min-height: 150px;"><h4 style="margin-bottom: 25px; text-align: center;">Что-то пошло не так...</h4><img  style="width: 70px; margin: auto;" src="./img/error.svg"></div>'
+    loading: '<div class="message"><h4>Загрузка...</h4><img src="./img/loader.gif"></div>',
+    success: '<div class="message"><h4>Спасибо! Скоро мы с вами свяжемся</h4><img src="./img/face.svg"></div>',
+    failure: '<div class="message"><h4>Что-то пошло не так...</h4><img src="./img/error.svg"></div>'
   };
   document.body.appendChild(popup);
   popup.addEventListener('click', function (event) {
@@ -1827,12 +1831,23 @@ function images() {
   document.addEventListener('mouseover', function (event) {
     var target = event.target;
     imageBlock.forEach(function (item, i) {
-      var image = item.querySelector('[class^="size"]');
+      var image = item.querySelector('img[class^="size"]');
+      var text = item.querySelectorAll('p');
 
       if (item.contains(event.target)) {
         image.src = "./img/sizes-".concat(i + 1, "-1.png");
+        text.forEach(function (item) {
+          item.style.display = 'none';
+
+          if (item.classList.contains('sizes-hit')) {
+            item.style.display = 'block';
+          }
+        });
       } else {
         image.src = "./img/sizes-".concat(i + 1, ".png");
+        text.forEach(function (item) {
+          item.style.display = 'block';
+        });
       }
     });
   });

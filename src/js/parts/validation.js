@@ -5,27 +5,27 @@ function validation() {
     emailInput = document.querySelectorAll('input[name="email"]'),
     textArea = document.querySelectorAll('.input-text');
 
-  phoneInput.forEach(function (item) {
+  phoneInput.forEach((item) => {
     item.addEventListener("input", mask, false);
     item.addEventListener("focus", mask, false);
     item.addEventListener("blur", mask, false);
   });
 
-  nameInput.forEach(function (item) {
+  nameInput.forEach((item) => {
     item.setAttribute('maxlength', '50');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[^А-Яа-я]/g, '');
     });
   });
 
-  emailInput.forEach(function (item) {
+  emailInput.forEach((item) => {
     item.setAttribute('maxlength', '50');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[А-Яа-я]/g, '');
     });
   });
 
-  textArea.forEach(function (item) {
+  textArea.forEach((item) => {
     item.setAttribute('maxlength', '150');
     item.addEventListener('input', () => {
       item.value = item.value.replace(/[A-Za-z]/g, '');
