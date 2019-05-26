@@ -1608,18 +1608,15 @@ function blocks() {
       btnStyles = document.querySelector('.button-styles');
   btnStyles.addEventListener('click', function () {
     this.style.display = 'none';
-    styleBlock.forEach(function (item) {
-      var styleParent = item.parentNode,
-          newStyles = styleBlock[0].parentNode.classList;
+    styleBlock.forEach(function (item, i, arr) {
+      var styleParent = item.parentNode;
 
       if (styleParent.classList.contains('styles-2')) {
         var _styleParent$classLis, _styleParent$classLis2;
 
-        var itemClass = styleParent.classList;
+        (_styleParent$classLis = styleParent.classList).remove.apply(_styleParent$classLis, _toConsumableArray(styleParent.classList));
 
-        (_styleParent$classLis = styleParent.classList).remove.apply(_styleParent$classLis, _toConsumableArray(itemClass));
-
-        (_styleParent$classLis2 = styleParent.classList).add.apply(_styleParent$classLis2, _toConsumableArray(newStyles));
+        (_styleParent$classLis2 = styleParent.classList).add.apply(_styleParent$classLis2, _toConsumableArray(styleBlock[0].parentNode.classList));
       }
     });
   });

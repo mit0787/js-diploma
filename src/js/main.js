@@ -433,13 +433,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
   btnStyles.addEventListener('click', function () {
     this.style.display = 'none';
-    styleBlock.forEach((item) => {
-      let styleParent = item.parentNode,
-        newStyles = styleBlock[0].parentNode.classList;
+    styleBlock.forEach((item, i , arr) => {
+      let styleParent = item.parentNode;
       if (styleParent.classList.contains('styles-2')) {
-        let itemClass = styleParent.classList;
-        styleParent.classList.remove(...itemClass);
-        styleParent.classList.add(...newStyles);
+        styleParent.classList.remove(...styleParent.classList);
+        styleParent.classList.add(...styleBlock[0].parentNode.classList);
       }
     });
   });
