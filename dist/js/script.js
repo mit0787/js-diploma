@@ -1608,7 +1608,7 @@ function blocks() {
       btnStyles = document.querySelector('.button-styles');
   btnStyles.addEventListener('click', function () {
     this.style.display = 'none';
-    styleBlock.forEach(function (item, i, arr) {
+    styleBlock.forEach(function (item) {
       var styleParent = item.parentNode;
 
       if (styleParent.classList.contains('styles-2')) {

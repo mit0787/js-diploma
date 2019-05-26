@@ -5,7 +5,7 @@ function blocks() {
 
   btnStyles.addEventListener('click', function () {
     this.style.display = 'none';
-    styleBlock.forEach((item, i , arr) => {
+    styleBlock.forEach((item) => {
       let styleParent = item.parentNode;
       if (styleParent.classList.contains('styles-2')) {
         styleParent.classList.remove(...styleParent.classList);
