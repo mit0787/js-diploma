@@ -9,14 +9,18 @@ function accordion() {
 
   btnAccord.forEach((item, i) => {
     item.addEventListener('click', () => {
-      btnAccord.forEach((item, i) => {
-        item.classList.remove('active');
-      });
-      blockAccord.forEach((item) => {
-        item.style.display = 'none';
-      });
-      item.classList.add('active');
-      blockAccord[i].style.display = 'block';
+      if (blockAccord[i].style.display === 'none') {
+        btnAccord.forEach((item, i) => {
+          item.classList.remove('active');
+        });
+        blockAccord.forEach((item) => {
+          item.style.display = 'none';
+        });
+        item.classList.add('active');
+        blockAccord[i].style.display = 'block';
+      } else {
+        blockAccord[i].style.display = 'none';
+      }
     });
   });
 }
