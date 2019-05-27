@@ -20,6 +20,7 @@ function accordion() {
         blockAccord[i].style.display = 'block';
       } else {
         blockAccord[i].style.display = 'none';
+        item.classList.remove('active');
       }
     });
   });
