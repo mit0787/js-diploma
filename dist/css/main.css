@@ -479,6 +479,9 @@ h4 {
   bottom: -25rem;
   left: 0;
 }
+.styles-2 {
+  display: none;
+}
 .card-block {
   background-color: #f7e7e6;
   padding-top: 7rem;

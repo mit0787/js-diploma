@@ -1595,15 +1595,12 @@ module.exports = accordion;
 /***/ (function(module, exports) {
 
 function blocks() {
-  // подгрузка блоков
-  var styleBlock = document.querySelectorAll('.styles-block'),
-      btnStyles = document.querySelector('.button-styles'),
-      style = styleBlock[0].parentNode.className;
+  var styleBlock = document.querySelectorAll('.styles-2'),
+      btnStyles = document.querySelector('.button-styles');
   btnStyles.addEventListener('click', function () {
     this.style.display = 'none';
     styleBlock.forEach(function (item) {
-      var parent = item.parentNode;
-      parent.className = style;
+      item.style.display = 'block';
     });
   });
 }
